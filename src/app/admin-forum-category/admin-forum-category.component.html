@@ -1,0 +1,82 @@
+<div class="admin-forum-category-container">
+    <div class="admin-forum-category-container-new-category">
+        <div>
+            <form [formGroup]="categoryForm" class="admin-forum-category-container-form">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label">Add new Category: </label>
+                    <div class="col-7">
+                        <input formControlName="categoryName" class="form-control" type="text" placeholder="Name"/>
+                        <bg-message
+                            *ngIf="errorMessage && formModel === 'SAVE' "
+                            [message]="errorMessage"
+                            [messageType]="messageTypeError">
+                        </bg-message>
+                    </div>
+                    <div class="col-1">
+                        <i  
+                            *ngIf="!categoryForm.invalid; else disableButton" 
+                            class="fa fa-plus fa-lg admin-forum-category-container-form-plus"
+                            (click)="saveCategory()">
+                        </i>
+                        <ng-template #disableButton>
+                            <i class="fa fa-plus fa-lg admin-forum-category-container-form-plus-disabled"></i>
+                        </ng-template>
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr 
+                        *ngFor="let category of categories" 
+                        [ngClass]="{'admin-forum-category-editting-tr': category.editting}">
+                        <td>
+                            <span [hidden]="category.editting">{{ category.name }}</span>
+                            <input
+                                type="text"
+                                class="admin-forum-category-editting-input" 
+                                [hidden]="!category.editting" 
+                                [(ngModel)]="categoryClone.name"/>
+                            <bg-message
+                                [hidden]="!category.editting"
+                                *ngIf="errorMessage && category.editting && formModel === 'EDIT' " 
+                                [message]="errorMessage"
+                                [messageType]="messageTypeError"
+                            ></bg-message>
+                        </td>
+                        <td>
+                            <i 
+                                [hidden]="category.editting" 
+                                class="fa fa-edit fa-lg mr-4 admin-forum-category-container-form-edit" 
+                                (click)="allowEdittingModel(category)">
+                            </i>
+                            <i 
+                                [hidden]="category.editting" 
+                                class="fa fa-trash fa-lg admin-forum-category-container-form-delete" 
+                                (click)="deleteCategory(category)">
+                            </i>
+                            <i 
+                                [hidden]="!category.editting" 
+                                class="fa fa-check fa-lg mr-4 admin-forum-category-container-form-save" 
+                                (click)="editCategory(category)">
+                            </i>
+                            <i 
+                                [hidden]="!category.editting" 
+                                class="fa fa-times fa-lg admin-forum-category-container-form-delete" 
+                                (click)="cancelEdittingModel(category)">
+                            </i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,8 @@
 # Exec Project
 
-Clone this repository, inside the project file, run `npm install` and then run `ng server`
+IMPORTANT: Using node version 12.18.3
+
+Clone this repository, inside the project file, run `npm install` and then run `ng server --open`
 
 # CoreSupersimBlog
 

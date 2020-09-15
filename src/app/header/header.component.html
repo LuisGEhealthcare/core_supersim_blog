@@ -1,11 +1,13 @@
 <nav class="navbar navbar-expand-md navbar-light header-navbar">
     <a class="navbar-brand header-navbar-brand" href="/">Blog Supersim</a>
     <div class="nav-link header-navbar-signin" *ngIf="(user$ | async) as Login; else login">
-        <a
+        <a  
+            class="header-navbar-admin-options"
             href="/admin">
             Admin Options
         </a>
         <a
+            href="#"
             (click)="logout()">
             Logout
         </a>

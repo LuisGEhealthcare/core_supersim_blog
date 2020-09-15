@@ -21,7 +21,7 @@ const routes: Routes = [
       canActivate: [Guard]
     },
     {
-      path: 'admin/category',
+      path: 'category',
       component: AdminCategoryComponent,
       canActivate: [Guard]
 

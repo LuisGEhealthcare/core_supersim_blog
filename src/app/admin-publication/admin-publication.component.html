@@ -4,7 +4,7 @@
     </div>
     <div class="admin-publication-buttons">
         <button type="button" class="btn btn-link" (click)="openPublicationForm()">Add Publication</button>
-        <button type="button" class="btn btn-link"><a href="/admin/category">Categories</a></button>
+        <button type="button" class="btn btn-link"><a href="/category">Categories</a></button>
     </div>
     <div [hidden]="isPublicationFormOpen == false" class="admin-publication-container-form">
         <form id="publicationForm" [formGroup]="publicationForm" class="admin-publication-form" (submit)="savePublication()">
@@ -60,6 +60,11 @@
                     type="file"
                     class="form-control-file"
                     accept="image/png, image/jpeg">
+                <bg-message 
+                    *ngIf="hasFileError"
+                    message="File is required"
+                    [messageType]="messageType">
+                </bg-message>
             </div>
             <div class="admin-publication-form-footer">
                 <button type="button" class="btn btn-danger" (click)="hiddenPublicationForm()">Cancel</button>

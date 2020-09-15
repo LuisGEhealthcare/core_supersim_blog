@@ -26,6 +26,7 @@ export class AdminPublicationComponent implements OnInit {
     isPublicationFormOpen: boolean = false;
     isPublicationEditFormOpen: boolean = false;
     messageType: MessageTypes = MessageTypes.ERROR;
+    hasFileError: boolean = false;
 
     constructor(
         private publicationService: PublicationService,
@@ -123,10 +124,17 @@ export class AdminPublicationComponent implements OnInit {
     }
 
     savePublication(){
+
+        if(!this.selectedFile){
+            this.hasFileError = true;
+            return;
+        }
+
         const title = this.publicationForm.get('title').value;
         const content = this.publicationForm.get('content').value;
         const category = this.publicationForm.get('category').value;
         const user = this.userService.getUser();
+        this.hasFileError = false;
 
         const publication = this.createPublicationObject(title, content, category, user);
 

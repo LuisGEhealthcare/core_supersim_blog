@@ -11,7 +11,6 @@ const FORM_MODEL = {
   EDIT: 'EDIT',
 }
 
-
 @Component({
   selector: 'app-admin-category',
   templateUrl: './admin-category.component.html',

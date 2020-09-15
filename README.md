@@ -1,3 +1,7 @@
+# Exec Project
+
+Clone this repository, inside the project file, run `npm install` and then run `ng server`
+
 # CoreSupersimBlog
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.

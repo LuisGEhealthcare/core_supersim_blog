@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { ReaderForumComponent } from './reader-forum/reader-forum.component';
-import { AdminForumComponent } from './admin-forum/admin-forum.component';
-import { AdminForumCategoryComponent } from './admin-forum-category/admin-forum-category.component';
+import { ReaderBlogComponent } from './reader-blog/reader-blog.component';
+import { AdminPublicationComponent } from './admin-publication/admin-publication.component';
+import { AdminCategoryComponent } from './admin-category/admin-category.component';
+import { AdminPublicationResolver } from './admin-publication/admin-publication.resolver';
+import { Guard } from './core/guard/guard';
 
 const routes: Routes = [
     {
@@ -12,15 +14,24 @@ const routes: Routes = [
     },
     {
       path: 'admin',
-      component: AdminForumComponent
+      component: AdminPublicationComponent,
+      resolve: {
+        publications: AdminPublicationResolver
+      },
+      canActivate: [Guard]
     },
     {
       path: 'admin/category',
-      component: AdminForumCategoryComponent
+      component: AdminCategoryComponent,
+      canActivate: [Guard]
+
     },
     {
       path: '',
-      component: ReaderForumComponent
+      component: ReaderBlogComponent,
+      resolve: {
+        publications: AdminPublicationResolver
+      }
     },
 
 ];

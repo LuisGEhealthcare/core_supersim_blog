@@ -1,0 +1,147 @@
+<div class="admin-publication-container">
+    <div>
+        <h1 class="text-center admin-publication-title">Publications</h1>
+    </div>
+    <div class="admin-publication-buttons">
+        <button type="button" class="btn btn-link" (click)="openPublicationForm()">Add Publication</button>
+        <button type="button" class="btn btn-link"><a href="/admin/category">Categories</a></button>
+    </div>
+    <div [hidden]="isPublicationFormOpen == false" class="admin-publication-container-form">
+        <form id="publicationForm" [formGroup]="publicationForm" class="admin-publication-form" (submit)="savePublication()">
+            <h1 class="admin-blog-container-form-title">Create Publication</h1>
+            <div class="form-group">
+                <label>Title</label>
+                <input
+                    formControlName="title"
+                    class="form-control"
+                    placeholder="Title"
+                    maxlength="255"
+                    autofocus
+                    />
+                <bg-message 
+                    *ngIf="publicationForm.get('title').errors?.required"
+                    message="Title is required"
+                    [messageType]="messageType">
+                </bg-message>
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea
+                    formControlName="content"
+                    class="form-control"
+                    rows="3"
+                    maxlength="255">
+                </textarea>
+                <bg-message 
+                    *ngIf="publicationForm.get('content').errors?.required"
+                    message="Content is required"
+                    [messageType]="messageType">
+                </bg-message>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" formControlName="category">
+                    <option 
+                        *ngFor="let category of categories"
+                        [ngValue]="category" 
+                        >
+                    {{category.name}}
+                    </option>
+                </select>
+                <bg-message 
+                    *ngIf="publicationForm.get('category').errors?.required"
+                    message="Content is required"
+                    [messageType]="messageType">
+                </bg-message>
+            </div>
+            <div>
+                <input
+                    (change)="selectFile($event)"
+                    type="file"
+                    class="form-control-file"
+                    accept="image/png, image/jpeg">
+            </div>
+            <div class="admin-publication-form-footer">
+                <button type="button" class="btn btn-danger" (click)="hiddenPublicationForm()">Cancel</button>
+                <button [disabled]="publicationForm.invalid" class="btn btn-primary" type="submit">Save Publication</button>
+            </div>
+        </form>
+    </div>
+
+    <div [hidden]="isPublicationEditFormOpen == false" class="admin-publication-container-form">
+        <form id="publicationEditForm" [formGroup]="publicationEditForm" class="admin-publication-form" (submit)="saveEditPublication()">
+            <h1 class="admin-blog-container-form-title">Edit Publication</h1>
+            <div class="form-group">
+                <label>Title</label>
+                <input
+                    formControlName="title"
+                    class="form-control"
+                    placeholder="Title"
+                    maxlength="255"
+                    autofocus
+                    />
+                <bg-message 
+                    *ngIf="publicationEditForm.get('title').errors?.required"
+                    message="Title is required"
+                    [messageType]="messageType">
+                </bg-message>
+            </div>
+            <div class="form-group">
+                <label>Content</label>
+                <textarea
+                    formControlName="content"
+                    class="form-control"
+                    rows="3"
+                    maxlength="255">
+                </textarea>
+                <bg-message 
+                    *ngIf="publicationEditForm.get('content').errors?.required"
+                    message="Title is required"
+                    [messageType]="messageType">
+                </bg-message>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" formControlName="category">
+                    <option 
+                        *ngFor="let category of categories"
+                        [ngValue]="category"
+                        >
+                    {{category.name}}
+                    </option>
+                </select>
+                <bg-message 
+                    *ngIf="publicationEditForm.get('category').errors?.required"
+                    message="Title is required"
+                    [messageType]="messageType">
+                </bg-message>
+            </div>
+            <div>
+                <input
+                    (change)="selectFile($event)"
+                    type="file"
+                    class="form-control-file"
+                    accept="image/png, image/jpeg">
+            </div>
+            <div class="admin-publication-form-footer">
+                <button type="button" class="btn btn-danger" (click)="hiddenPublicationEditForm()">Cancel</button>
+                <button class="btn btn-primary" type="submit">Save Publication</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="admin-publication-cards" *ngFor="let publication of publications">
+        <app-admin-publication-card
+            (deletePublication) = "deletePublication($event)"
+            (editPublication) = "enablePublicationEditForm($event)"
+            [publicationId]="publication.id"
+            [image]="(publication.photoLink | safeResourceUrl)" 
+            [title]="publication.title" 
+            [content]="publication.content" 
+            [data]="publication.calendar"
+            [category]="publication.categoryDTO"
+            [user]="publication.userDTO">
+        </app-admin-publication-card>
+    </div>
+</div>
+

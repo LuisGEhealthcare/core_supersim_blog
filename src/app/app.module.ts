@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
-import { ReaderForumModule } from './reader-forum/reader-forum.module';
+import { ReaderForumModule } from './reader-blog/reader-blog.module';
 import { HeaderComponent } from './header/header.component';
-import { AdminForumModule } from './admin-forum/admin-forum.module';
-import { AdminForumCategoryModule } from './admin-forum-category/admin-forum-category.module';
+import { AdminPublicationModule } from './admin-publication/admin-publication.module';
+import { AdminCategoryModule } from './admin-category/admin-category.module';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
@@ -22,8 +22,8 @@ import { CoreModule } from './core/core.module';
     NoopAnimationsModule,
     CoreModule,
     LoginModule,
-    AdminForumModule,
-    AdminForumCategoryModule,
+    AdminPublicationModule,
+    AdminCategoryModule,
     ReaderForumModule
   ],
   providers: [],

@@ -1,5 +1,8 @@
-<div class="reader-forum-container">
-    <div class="reader-forum-cards" *ngFor="let publication of publications">
+<div class="reader-blog-container">
+    <div class="reader-blog-header">
+        <img style="width: 300px;" src="../../assets/img/logoPng.png"/>
+    </div>
+    <div class="reader-blog-cards" *ngFor="let publication of publications">
         <app-reader-blog-card 
             [image]="(publication.photoLink | safeResourceUrl)" 
             [title]="publication.title" 
